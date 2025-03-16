@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h3>Select Category</h3>
+    <form action="{% url 'category' %}" method=POST class="mb-5">
+        {% csrf_token %}
+    <select class="form-select" name="category">
+        <option selected>
+          Select Category
+        </option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothes">Clothes</option>
+        <option value="Shoes">Shoes</option>
+      </select>
+      <button type="submit" class="btn btn-success">Get Listings</button>
+
+    </form>
+    {% if messagec %}
+    <div class="alert alert-failure" role="alert">
+        {{ messagec }}
+    </div>
+    {% endif %}
+    {% if not listing %}
+    <div class="alert alert-dark" role="alert">
+        No listings to display in this category
+    </div>
+    {% endif %}
+    <div class="row">
+        {% for list in listing %}
+        <div class="card mr-3 ml-4 mb-4 mt-10" style="width: 18rem;">
+            <span class="badge badge-pill badge-light">Posted By: <b>{{ list.creator }}</b></span>
+            <img class="card-img-top" src="{{ list.image }}" alt="{{ list.title }}">
+            <div class="card-body">
+                {% if list.category %}
+                <span class="badge badge-pill badge-dark">{{ list.category }}</span>
+                {% endif %}
+                <h5 class="card-title">{{ list.title }}</h5>
+                <p class="card-text">{{ list.description }}</p>
+                <p><b>${{ list.price }}</b></p>
+                <a href="{% url 'listingdetails' list.id %}" class="btn btn-primary">Listing Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

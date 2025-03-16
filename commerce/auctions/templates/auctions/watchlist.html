@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+    {% if not listing %}
+    <div class="alert alert-dark" role="alert">
+        No listings yet. Add some to display here.
+      </div>
+    {% endif %}
+  <div class="row">
+    {% for list in listing %}
+    <div class="card mr-3 ml-4 mb-4 mt-10" style="width: 18rem;">
+        <span class="badge badge-pill badge-light">Posted By: <b>{{list.creator}}</b></span>
+        <img class="card-img-top" src="{{list.image}}" alt="{{list.title}}">
+        <div class="card-body">
+            {% if list.category %}
+            <span class="badge badge-pill badge-dark">{{list.category}}</span>
+            {% endif %}
+          <h5 class="card-title">{{list.title}}</h5>
+
+          <p class="card-text">{{list.description}}</p>
+          <p><b>${{list.price}}</b></p>
+          <a href="{% url 'listingdetails' list.id %}" class="btn btn-primary">Listing Details</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}
