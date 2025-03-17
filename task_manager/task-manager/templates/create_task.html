@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+    {% block title %}
+
+        Create Task
+
+    {% endblock %}
+
+    {% block main %}
+    <!--bootstrap classes for making the card interactive-->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-light">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Create Task</h3>
+                <!-- form to be displayed for getting the details of the task to be created-->
+                    <form action="/create" method="post">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" autofocus class="form-control mx-auto w-auto" name="title" placeholder="Title" required>
+
+                        </div>
+                        <!--for providing the description of the task-->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description"class="form-control" placeholder="Enter the description of task" required></textarea>
+
+                        </div>
+                        <!--for the selection of the due date of the task-->
+                        <div class="mb-3">
+                            <label for="due_date" class="form-label">Due Date</label>
+                            <input type="date" class="form-control w-auto" placeholder="Due Date" name="due_date">
+
+                        </div>
+                        <!--div to select the task priority-->
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select name="priority" class="form-control">
+                                <option value="" disabled selected>Select Priority</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    <!--button for creating the task-->
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Create Task</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--script to check if the due date entered is not less than the current date-->
+    <script>
+        let today = new Date().toISOString().split('T')[0];
+        document.querySelector("input[name='due_date']").setAttribute("min", today);
+
+        document.querySelector("form").addEventListener("submit", function(event) {
+            let dueDateGet = document.querySelector("input[name='due_date']");
+            let dueDate = dueDateGet.value;
+
+            // check if the due date is in the past
+            if (new Date(dueDate) < new Date(today)) {
+                alert("Due date cannot be in the past");
+                event.preventDefault();  // prevent form submission
+            }
+        });
+    </script>
+  {% endblock %}

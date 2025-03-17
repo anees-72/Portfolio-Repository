@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+    {% block title %}Login{% endblock %}
+
+    {% block main %}
+    <!--card for displaying the details of the form-->
+    <div class=" row justify-content-center mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-light">
+                <div class="card-body">
+                    <h3 class="card-title text-center ">Login</h3>
+                    <form action="/login" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" autofocus class="form-control" name="username" required placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password"  class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" required placeholder="Password">
+                    </div>
+                    {% if message %}
+                        <div class="alert alert-danger">{{message}}</div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <p class="text-center mt-3">Don't have an account!</p><p class="text-center"><a href="/register">Register Here</a></p>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

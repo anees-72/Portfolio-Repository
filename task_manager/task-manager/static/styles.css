@@ -1,0 +1,37 @@
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #f8f9fa;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+
+.navbar-nav .nav-item {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar-brand {
+    font-size: 32px;
+    font-weight: bold;
+}
+.container{
+    margin-bottom:10px;
+}
+
+@media(max-widht:767px)
+{
+    .navbar-brand{
+        font-size:1.5rem;
+    }
+}
+.thead{
+    background-color:#3498db;
+    color:white;
+}

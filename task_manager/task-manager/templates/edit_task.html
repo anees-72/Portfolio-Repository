@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+    {% block title %}
+
+        Edit Task
+
+    {% endblock %}
+
+    {% block main %}
+    <!--bootstrap classes for the card-->
+    <div class="row justify-content-center mt-5 mb-3">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-light">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Edit Task</h3>
+                 <!--form for collecting the data to be updated in the database-->
+                    <form action="/edit/{{task.id}}" method="post">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" autofocus class="from-control mx-auto w-auto" value="{{task.title}}" name="title" placeholder="Title" required>
+
+                        </div>
+                        <!--for the new description overwriting the previous one -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description"class="form-control" rows=3  placeholder="Enter the description of task" required>{{task.description}}</textarea>
+
+                        </div>
+                        <!-- for selecting the due date of the task -->
+                        <div class="mb-3">
+                            <label for="due_date" class="form-label">Due Date</label>
+                            <input type="date" class="form-control w-auto" placeholder="Due Date" value="{{task.due_date}}" name="due_date">
+
+                        </div>
+                        <!--for selecting the priority of the task-->
+                        <div class="mb-3">
+                            <label for="priority" clas="form-label">Priority</label>
+                            <select name="priority" class="form-control">
+                                <option value="" disabled selected>Select Priority</option>
+                                <option value="low" {% if task.priority=="low" %} selected {% endif %}>Low</option>
+                                <option value="medium"  {% if task.priority=="medium" %} selected {% endif %}>Medium</option>
+                                <option value="high"  {% if task.priority=="high" %} selected {% endif %}>High</option>
+                            </select>
+                        </div>
+                   <!--button for saving the changes-->
+                        <button class="btn btn-primary w-100" type="submit">Save Changes</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--script for checking if the due date is not in past-->
+        <script>
+            let today=new Date().toISOString().split("T")[0];
+
+            document.querySelector("input[name='due_date']").setAttribute("min",today);
+
+            document.querySelector("form").addEventListener("submit",function(event){
+            dueDateGet=document.querySelector("input[name='due_date']");
+            dueDate=dueDateGet.value;
+            if (new Date(dueDate)<new Date(today))
+             {alert("Due date can not be in the past");
+             event.preventDefault()}
+            });
+        </script>
+   {% endblock %}

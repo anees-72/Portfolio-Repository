@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar View</title>
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css" rel="stylesheet">
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body class="bg-light">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold" href="/" style="font-size: 32px;">Task Manager</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        {% if session["user_id"] %}
+                            <li class="nav-item"><a class="nav-link" href="/" style="font-size: 18px;">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/create" style="font-size: 18px;">Create Task</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/history" style="font-size:18px;">History</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/get_tasks_calendar" style="font-size:18px;">Calendar View</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        {% if session["user_id"] %}
+                            <li class="nav-item"><a class="nav-link" href="/logout" style="font-size: 18px;">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="/login" style="font-size: 18px;">Log In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/register" style="font-size: 18px;">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <div id="calendar"></div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    events: '/get_tasks_calendar_data',
+                    header: {
+                        left: 'prev,next,today',
+                        center: 'title',
+                        right: 'year,month,agendaWeek,agendaDay'
+                    }
+                });
+            });
+        </script>
+    </body>

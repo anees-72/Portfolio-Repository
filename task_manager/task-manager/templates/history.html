@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Task History
+{% endblock %}
+
+{% block main %}
+<!--main heading of the page-->
+    <h1 class="text-center mb-4 mt-2" style="font-size: 36px; color: #2c3e50;">Task History</h1>
+<!--start of the table and necessary bootstrap classes to make it interactive-->
+    <table class="table table-striped table-hover table-bordered">
+        <!--thead-->
+        <thead class="thead">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr >
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.due_date }}</td>
+                <td>
+                    <span >
+                        {{ task.status }}
+                    </span>
+                </td>
+                <td>{{ task.priority }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
