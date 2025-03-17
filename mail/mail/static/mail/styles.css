@@ -1,0 +1,40 @@
+textarea {
+    min-height: 400px;
+    max-height: 600px;
+}
+.email-item {
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+
+
+
+.email-sender {
+    font-weight: bold;
+    color: #007bff;
+    flex-grow: 1;
+  }
+
+
+  .email-subject {
+    color: #333;
+    flex-grow: 2;
+    font-weight: bold;
+  }
+
+
+  .email-timestamp {
+    font-size: 0.9em;
+    color: gray;
+    margin-left: 10px;
+  }
