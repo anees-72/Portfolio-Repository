@@ -1,0 +1,76 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    <div class="text-center mt-6 mb-2">
+        <i class="bi bi-person-circle" style="font-size:100px"></i>
+        <h2>{{profile_user.username}}</h2>
+        <p style="font-size:25px" class="mr-2"><i class="bi bi-people mr-1" style="color:green"></i>Followers:{{followers}}</p>
+        <p style="font-size:25px" class="mr-2"><i class="bi bi-person-check mr-1" style="color:blue"></i>Following:{{following}}</p>
+    </div>
+    <form action="{% url 'toggle_follow' %}" method="POST">
+      {% csrf_token %}
+      {% if button is not None %}
+    <div class="text-center">
+      <input type="hidden" value={{button}} name="button_value">
+      <input type="hidden" value={{profile_user.id}} name="profile_user">
+    <button type="submit" id="follow-btn" class="btn {% if button == 'Follow' %}btn-success{% else %}btn-danger{% endif %}">
+        <i class="bi {% if button == 'Follow' %}bi-person-plus{% else %}bi-person-dash{% endif %}"></i>
+        {{ button }}
+      </button></div>
+    {% endif %}</form>
+
+    <hr>
+
+    {% if posts %}
+    <ul class="list-unstyled mt-5">
+    {% for post in posts %}
+  <br>
+<div class="ml-5">
+    <li class="ml-2">
+            <h5 class="card-title" type="submit"><a href="{% url 'profile' user_id=post.user.id %}" class="text-decoration-none text-dark">{{ post.user }}</a></h5>
+            <p class="card-text" id="content-{{post.id}}">{{ post.content }}</p>
+            <textarea class="form-control mb-2" id="textarea-{{post.id}}" style="display:none">{{post.content}}</textarea>
+            <button class="like-btn ms-1 mb-1" data-post-id="{{post.id}}" style="border:none;background:transparent">
+              <i class="bi bi-heart {% if request.user in post.likes.all%}-fill{% endif %}" style="color:red"></i>
+              <span id="like-count-{{post.id}}">{{post.likes_count}}</span>
+            </button>
+            <p class="card-text text-muted"><i class="bi bi-clock mr-2" style="color:blue"></i>{{ post.timestamp }}</p>
+            <meta name="csrfmiddlewaretoken" content="{{ csrf_token }}">
+            <button class="save-btn btn btn-success" id="save-{{post.id}}" style="display:none">Save</button>
+            <button class="cancel-btn btn btn-secondary" id="cancel-{{post.id}}" style="display:none">Cancel</button>
+            {% if post.user == request.user %}
+            <button class="edit-btn btn btn-primary"  data-post-id="{{post.id}}">Edit</button>
+            {% endif %}
+    </li></div><hr>
+
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <nav >
+      <ul class="pagination justify-content-center">
+          {% if posts.has_previous %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{posts.previous_page_number}}">Previous</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+              <a class="page-link" tabindex="-1">Previous</a>
+          </li>
+          {% endif %}
+          <li class="page-item active">
+              <a class="page-link" href="#">{{posts.number}}</a>
+          </li>
+          {% if posts.has_next %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{posts.next_page_number}}">Next</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+              <a class="page-link" tabindex="-1">Next</a>
+          </li>
+          {% endif %}
+      </ul>
+  </nav>
+{% endblock %}
