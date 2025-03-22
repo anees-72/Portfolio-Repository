@@ -2,6 +2,6 @@
   "routes": [
     { "src": "/static/(.*\\.css)", "dest": "/public/$1", "headers": { "Content-Type": "text/css" } },
     { "src": "/static/(.*\\.js)", "dest": "/public/$1", "headers": { "Content-Type": "application/javascript" } },
-    { "src": "/(.*)", "dest": "/project4/wsgi.py" }
+    { "src": "/(.*)", "dest": "vercel.wsgi.py" }
   ]
 }
