@@ -4,7 +4,7 @@
     "use":"@vercel/python"
   }
   ],
-  "route":[{
+  "routes":[{
     "src":"/(.*)",
     "dest":"wsgi.py"
   }]
