@@ -129,4 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS=[BASE_DIR / 'network' /'static' /'network']
+STATICFILES_DIRS=[BASE_DIR / 'network' /'static' ]
