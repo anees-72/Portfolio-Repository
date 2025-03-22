@@ -3,6 +3,6 @@
   "routes": [
     { "src": "/static/(.*\\.css)", "dest": "/staticfiles/$1", "headers": { "Content-Type": "text/css" } },
     { "src": "/static/(.*\\.js)", "dest": "/staticfiles/$1", "headers": { "Content-Type": "application/javascript" } },
-    { "src": "/(.*)", "dest": "project4/wsgi.py" }
+    { "src": "/(.*)", "dest": "/project4/wsgi.py" }
   ]
 }
