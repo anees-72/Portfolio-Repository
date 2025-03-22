@@ -1,14 +1,8 @@
 {
-  "builds":[{
-    "src":"project4/wsgi.py",
-    "use":"@vercel/python"
-  }
-  ],
-  "routes":[{
-    "src":"/(.*)",
-    "dest":"project4/wsgi.py"
-  },{
-    "src":"/static/(.*)",
-    "dest":"/staticfiles/$1"
-  }]
+  "builds": [{ "src": "project4/wsgi.py", "use": "@vercel/python" }],
+  "routes": [
+    { "src": "/static/(.*\\.css)", "dest": "/staticfiles/$1", "headers": { "Content-Type": "text/css" } },
+    { "src": "/static/(.*\\.js)", "dest": "/staticfiles/$1", "headers": { "Content-Type": "application/javascript" } },
+    { "src": "/(.*)", "dest": "project4/wsgi.py" }
+  ]
 }
