@@ -1,10 +1,16 @@
 {
   "builds": [
-    { "src": "project4/wsgi.py", "use": "@vercel/python" }
+    {
+      "src": "project4/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "installCommand": "pip install -r requirements.txt",
+        "buildCommand": "python manage.py collectstatic --noinput"
+      }
+    }
   ],
   "routes": [
-    { "src": "/static/network/(.*\\.js)", "dest": "/public/network/$1", "headers": { "Content-Type": "application/javascript" } },
-    { "src": "/static/network/(.*\\.css)", "dest": "/public/network/$1", "headers": { "Content-Type": "text/css" } },
+    { "src": "/static/(.*)", "dest": "/$1" },
     { "src": "/(.*)", "dest": "project4/wsgi.py" }
   ]
 }
