@@ -4,13 +4,18 @@
       "src": "project4/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "installCommand": "pip install -r requirements.txt",
         "buildCommand": "python manage.py collectstatic --noinput"
       }
     }
   ],
   "routes": [
-    { "src": "/static/(.*)", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "project4/wsgi.py" }
+    { 
+      "src": "/static/network/(.*)", 
+      "dest": "/network/$1" 
+    },
+    { 
+      "src": "/(.*)", 
+      "dest": "project4/wsgi.py" 
+    }
   ]
 }
