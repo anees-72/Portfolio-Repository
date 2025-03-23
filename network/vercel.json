@@ -7,20 +7,8 @@
   ],
   "routes": [
     {
-      "src": "/static/network/(.*\\.css)",
-      "dest": "/public/network/$1",
-      "headers": {
-        "Content-Type": "text/css",
-        "Cache-Control": "public, max-age=31536000"
-      }
-    },
-    {
-      "src": "/static/network/(.*\\.js)",
-      "dest": "/public/network/$1",
-      "headers": {
-        "Content-Type": "application/javascript",
-        "Cache-Control": "public, max-age=31536000"
-      }
+      "src": "/static/network/(.*)",
+      "dest": "/public/network/$1"
     },
     {
       "src": "/(.*)",
