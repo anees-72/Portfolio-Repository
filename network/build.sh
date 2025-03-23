@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# Install dependencies
 pip3 install -r requirements.txt
-python3 manage.py migrate
+
+# Collect static files
 python3 manage.py collectstatic --noinput
+
+# Copy files to Vercel's output directory
+cp -r public/ /vercel/output/
+cp -r project4/ /vercel/output/

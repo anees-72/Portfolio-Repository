@@ -3,8 +3,8 @@
     {
       "src": "project4/wsgi.py",
       "use": "@vercel/python",
-      "config": {
-        "buildCommand": "python3 manage.py collectstatic --noinput"
+      "config": { 
+        "buildCommand": "./build.sh" 
       }
     }
   ],
