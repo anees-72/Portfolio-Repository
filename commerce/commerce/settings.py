@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['aneesali1.pythonanywhere.com']
 
-
+LOGIN_URL = '/login'
 # Application definition
 
 INSTALLED_APPS = [
