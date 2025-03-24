@@ -8,4 +8,4 @@ python3 manage.py collectstatic --noinput
 
 # Copy files to Vercel's output directory
 cp -r public/ /vercel/output/
-cp -r project4/ /vercel/output/
+cp -r project3/ /vercel/output/
