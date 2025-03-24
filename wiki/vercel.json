@@ -1,0 +1,6 @@
+{
+    "routes": [
+      { "src": "/static/wiki/(.*)", "dest": "/wiki/$1" ,"headers":{"Cache-Control":"public,max-age=1209600,immutable"}},
+      { "src": "/(.*)", "dest": "/api/wsgi.py" }
+    ]
+  }
