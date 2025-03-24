@@ -1,0 +1,7 @@
+{
+ 
+    "routes": [
+      { "src": "/static/mail/(.*)", "dest": "/mail/$1" },
+      { "src": "/(.*)", "dest": "/api/wsgi.py" }
+    ]
+  }
