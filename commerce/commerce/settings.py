@@ -24,11 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['aneesali1.pythonanywhere.com']
+ALLOWED_HOSTS = ['aneesali1.pythonanywhere.com','localhost']
 
-LOGIN_URL = '/login'
+LOGIN_URL = 'login'
 # Application definition
 
 INSTALLED_APPS = [

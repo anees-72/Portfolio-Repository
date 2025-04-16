@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse
@@ -79,7 +80,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
-
+@login_required
 def makelisting(request):
     if request.method == "POST":
         title = request.POST["title"]
@@ -117,7 +118,7 @@ def makelisting(request):
         })
 
     return render(request, "auctions/makelisting.html")
-
+@login_required
 def listingdetails(request, listing_id):
     listing = Listing.objects.get(id=listing_id)
     user = request.user
